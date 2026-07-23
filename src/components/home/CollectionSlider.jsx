@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import "../../css/carousel-arrows.css";
 
 const CollectionSlider = ({array}) => {
 
@@ -11,16 +11,19 @@ const CollectionSlider = ({array}) => {
     const next = () => sliderRef.slickNext();
     const previous = () => sliderRef.slickPrev();
 
+    let st = {width: "40px", height: "40px", background: "white" , 
+              opacity: ".75", zIndex: "2", display: "grid", 
+              placeItems: "center", color:"black", 
+              border: "2px solid lightgray", borderRadius: "40px"};
+
     function PrevArrow(props) {
-        const {className, style} = props;
+        const {className} = props;
         return (
             <div 
                 className={className}
-                style={{...style, zIndex: "2", display: "block", color:"black", border: "1px solid black", background: "white", left: "16px", borderRadius: "40px", width: "40px", height: "40px"}}
+                style={{...st, left: "0"}}
                 onClick={previous}                
-            >
-                <p style={{color: "red"}}>H</p>
-            </div>
+            />
         )
     }
 
@@ -29,17 +32,9 @@ const CollectionSlider = ({array}) => {
         return (
             <div 
                 className={className}
-                style={{...style, display: "block", border: "1px solid black", background: "black", right: "16px"}}
+                style={{...st, right: "0"}}
                 onClick={next}
             />
-        )
-    }
-
-    function customSlide(props) {
-        return (
-            <div>
-                
-            </div>
         )
     }
 
@@ -72,20 +67,11 @@ const CollectionSlider = ({array}) => {
         ]
     };
 
-    // var settings = {
-    //     infinite: true,
-    //     speed: 500,
-    //     slidesToShow: 2/3,
-    //     slidesToScroll: 1/6,
-    //     slidesPerRow: 6,
-    //     nextArrow: <NextArrow />,
-    //     prevArrow: <PrevArrow />
-    // };
-
   return (
     <Slider ref={slider => sliderRef=slider} {...settings}>
         {array.map((collection) => (
-        <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={collection.id}>
+        // <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={collection.id}>
+        <div className='slide__wrap' key={collection.id}>
             <div className="nft_coll">
                 <div className="nft_wrap">
                     <Link to="/item-details">
