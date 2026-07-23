@@ -53,13 +53,13 @@ const CollectionSlider = ({array}) => {
                 }
             },
             {
-                breakpoint: 990,
+                breakpoint: 991.33,
                 settings: {
                     slidesToShow: 2
                 }
             },
             {
-                breakpoint: 575,
+                breakpoint: 575.33,
                 settings: {
                     slidesToShow: 1
                 }
@@ -69,30 +69,47 @@ const CollectionSlider = ({array}) => {
 
   return (
     <Slider ref={slider => sliderRef=slider} {...settings}>
-        {array.map((collection) => (
-        // <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={collection.id}>
-        <div className='slide__wrap' key={collection.id}>
-            <div className="nft_coll">
-                <div className="nft_wrap">
-                    <Link to="/item-details">
-                    <img src={collection.nftImage} className="lazy img-fluid" alt="" />
-                    </Link>
+        {array?
+            array.map((collection) => (
+                <div className='slide__wrap' key={collection.id}>
+                    <div className="nft_coll">
+                        <div className="nft_wrap">
+                            <Link to="/item-details">
+                            <img src={collection.nftImage} className="lazy img-fluid" alt="" />
+                            </Link>
+                        </div>
+                        <div className="nft_coll_pp">
+                            <Link to="/author">
+                            <img className="lazy pp-coll" src={collection.authorImage} alt="" />
+                            </Link>
+                            <i className="fa fa-check"></i>
+                        </div>
+                        <div className="nft_coll_info">
+                            <Link to="/explore">
+                            <h4>{collection.title}</h4>
+                            </Link>
+                            <span>`ERC-{collection.code}`</span>
+                        </div>
+                    </div>
                 </div>
-                <div className="nft_coll_pp">
-                    <Link to="/author">
-                    <img className="lazy pp-coll" src={collection.authorImage} alt="" />
-                    </Link>
-                    <i className="fa fa-check"></i>
+            ))
+            :
+            new Array(4).fill().map((elem, index)=> (
+                <div className='slide__wrap' key={index}>
+                    <div className="nft_coll skeleton__slide">
+                        <div className="nft_wrap skeleton nft__skeleton"></div>
+                        <div className="nft_coll_pp img__skeleton--wrapper skeleton">
+                            <div className='check__skeleton--wrap'><i className="fa fa-check check__skeleton"></i></div>
+                            
+                        </div>
+                        <div className="skeleton__text--wrap">
+                            <div className='skeleton skeleton__text longer-text__skeleton'></div>
+                            <div className='skeleton skeleton__text'></div>
+                        </div>
+                    </div>
                 </div>
-                <div className="nft_coll_info">
-                    <Link to="/explore">
-                    <h4>{collection.title}</h4>
-                    </Link>
-                    <span>`ERC-{collection.code}`</span>
-                </div>
-            </div>
-        </div>
-        ))}
+            ))
+        }
       
     </Slider>
   )
