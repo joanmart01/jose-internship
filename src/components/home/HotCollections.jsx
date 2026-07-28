@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import CollectionSlider from "./CollectionSlider";
+import CollectionSlider from "../UI/CollectionSlider";
 
 const HotCollections = () => {
   const [collections, setCollections] = useState([]);
@@ -9,8 +9,13 @@ const HotCollections = () => {
 
   useEffect(()=>{
     fetchCollections();
+    // document.querySelector(".slick-list").classList.add("hot-collection-list");
     setLoading(false);
   }, [])
+
+  
+
+  
 
   async function fetchCollections() {
     const promise = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"); 
