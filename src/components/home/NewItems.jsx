@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+import axios from "axios";
+import CollectionSlider from "../UI/CollectionSlider";
+import Timer from "../UI/Timer";
 
 const NewItems = () => {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(()=> {
+    fetchItems();
+    // document.querySelector("#new-items-slider").querySelector(".slick-list").classList.add("new-items-list");
+    // document.getElementById("new-items-slider").querySelector(".slick-list").classList.add("new-items-list");
+    setLoading(false);
+  }, [])
+
+
+  async function fetchItems() {
+    const promise = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems");
+    setItems(promise.data);
+  }
+
+
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -14,8 +32,27 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {new Array(4).fill(0).map((_, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+
+          <CollectionSlider
+          ID = "new-items-slider" 
+          array={loading?
+            new Array(4).fill().map((_, index)=> (
+              <div className="slide__wrap" key={index}>
+                <div className="skeleton__slide nft__item">
+                  <i className="fa fa-check new-item__check"></i>
+                  <div className="skeleton new-item__nft-skeleton"></div>                  
+                  <div className="new-item__skeleton-text-wrap">
+                    <div className="skeleton new-item__top-text-skeleton"></div>
+                    <div className="skeleton new-item__bottom-text-skeleton"></div>
+                    <div className="nft__item_like skeleton new-item__like-skeleton"></div>
+                  </div>
+                </div>
+              </div>
+            ))
+            
+            : 
+            items.map((it)=> (
+            <div className="slide__wrap" key={it.id}>
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link
@@ -24,11 +61,11 @@ const NewItems = () => {
                     data-bs-placement="top"
                     title="Creator: Monica Lucas"
                   >
-                    <img className="lazy" src={AuthorImage} alt="" />
+                    <img className="lazy" src={it.authorImage} alt="" />
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
-                <div className="de_countdown">5h 30m 32s</div>
+                <Timer expTime={it.expiryDate}/>
 
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
@@ -51,7 +88,7 @@ const NewItems = () => {
 
                   <Link to="/item-details">
                     <img
-                      src={nftImage}
+                      src={it.nftImage}
                       className="lazy nft__item_preview"
                       alt=""
                     />
@@ -59,17 +96,19 @@ const NewItems = () => {
                 </div>
                 <div className="nft__item_info">
                   <Link to="/item-details">
-                    <h4>Pinky Ocean</h4>
+                    <h4>{it.title}</h4>
                   </Link>
-                  <div className="nft__item_price">3.08 ETH</div>
+                  <div className="nft__item_price">{`${it.price} ETH`}</div>
                   <div className="nft__item_like">
                     <i className="fa fa-heart"></i>
-                    <span>69</span>
+                    <span>{it.likes}</span>
                   </div>
                 </div>
               </div>
             </div>
-          ))}
+            ))
+          } />
+
         </div>
       </div>
     </section>
