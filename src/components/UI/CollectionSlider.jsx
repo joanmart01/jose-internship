@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../css/carousel-arrows.css";
 
-const CollectionSlider = ({array}) => {
+const CollectionSlider = ({array, ID}) => {
 
     let sliderRef = useRef(null);
     const next = () => sliderRef.slickNext();
@@ -67,9 +67,11 @@ const CollectionSlider = ({array}) => {
     };
 
   return (
-    <Slider ref={slider => sliderRef=slider} {...settings}>
-        {array}
-    </Slider>
+    <div id={ID}>
+        <Slider id="hello" ref={slider => sliderRef=slider} {...settings}>
+            {array}
+        </Slider>
+    </div>
   )
 }
 

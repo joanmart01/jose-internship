@@ -36,21 +36,15 @@
 
 .slick-slide {
     min-width: 300px;
-    /* max-width: 324px; */
 }
 
-/* .hot-collection-list {
-    max-height: 327px;
+#hot-collections-slider .slick-slider .slick-list {
+    max-height: 316px;
 }
 
-.new-items-list {
-    max-height: 445px;
-} */
-
-.slick-list {
-    background-color: aquamarine;
+#new-items-slider .slick-slider .slick-list {
+    max-height: 448px;
 }
-
 
 
 

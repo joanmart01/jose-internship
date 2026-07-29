@@ -32,7 +32,7 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {<CollectionSlider 
+          {<CollectionSlider ID="hot-collections-slider" className="col-slide"
             array={loading?
               new Array(4).fill().map((elem, index)=> (
                 <div className='slide__wrap' key={index}>

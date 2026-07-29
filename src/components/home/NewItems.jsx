@@ -34,7 +34,7 @@ const NewItems = () => {
           </div>
 
           <CollectionSlider
-          id = {"new-items-slider"} 
+          ID = "new-items-slider" 
           array={loading?
             new Array(4).fill().map((_, index)=> (
               <div className="slide__wrap" key={index}>
