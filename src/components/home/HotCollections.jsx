@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import CollectionSlider from "../UI/CollectionSlider";
+import Skeleton from "../UI/Skeleton";
 
 const HotCollections = () => {
   const [collections, setCollections] = useState([]);
@@ -9,13 +10,8 @@ const HotCollections = () => {
 
   useEffect(()=>{
     fetchCollections();
-    // document.querySelector(".slick-list").classList.add("hot-collection-list");
     setLoading(false);
   }, [])
-
-  
-
-  
 
   async function fetchCollections() {
     const promise = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"); 
@@ -37,14 +33,14 @@ const HotCollections = () => {
               new Array(4).fill().map((elem, index)=> (
                 <div className='slide__wrap' key={index}>
                     <div className="nft_coll skeleton__slide">
-                        <div className="nft_wrap skeleton nft__skeleton"></div>
-                        <div className="nft_coll_pp img__skeleton--wrapper skeleton">
-                            <div className='check__skeleton--wrap'><i className="fa fa-check check__skeleton"></i></div>
-                            
-                        </div>
-                        <div className="skeleton__text--wrap">
-                            <div className='skeleton skeleton__text longer-text__skeleton'></div>
-                            <div className='skeleton skeleton__text'></div>
+                        <Skeleton width={"100%"} height={"140px"} additionalClasses={"nft_wrap"} />
+                          <Skeleton width={"40px"} height={"40px"} additionalClasses={"nft_coll_pp img__skeleton--wrapper"} />
+                          <div className='check__skeleton--wrap'>
+                            <i className="fa fa-check check__skeleton"></i>
+                          </div>
+                        <div className="nft_coll_info">
+                            <Skeleton width={"80px"} height={"15px"} />
+                            <Skeleton width={"50px"} height={"15px"} />
                         </div>
                     </div>
                 </div>

@@ -68,7 +68,7 @@ const CollectionSlider = ({array, ID}) => {
 
   return (
     <div id={ID}>
-        <Slider id="hello" ref={slider => sliderRef=slider} {...settings}>
+        <Slider ref={slider => sliderRef=slider} {...settings}>
             {array}
         </Slider>
     </div>

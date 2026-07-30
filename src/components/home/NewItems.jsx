@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import CollectionSlider from "../UI/CollectionSlider";
 import Timer from "../UI/Timer";
+import Skeleton from "../UI/Skeleton";
 
 const NewItems = () => {
   const [items, setItems] = useState([]);
@@ -10,8 +11,6 @@ const NewItems = () => {
 
   useEffect(()=> {
     fetchItems();
-    // document.querySelector("#new-items-slider").querySelector(".slick-list").classList.add("new-items-list");
-    // document.getElementById("new-items-slider").querySelector(".slick-list").classList.add("new-items-list");
     setLoading(false);
   }, [])
 
@@ -40,11 +39,11 @@ const NewItems = () => {
               <div className="slide__wrap" key={index}>
                 <div className="skeleton__slide nft__item">
                   <i className="fa fa-check new-item__check"></i>
-                  <div className="skeleton new-item__nft-skeleton"></div>                  
-                  <div className="new-item__skeleton-text-wrap">
-                    <div className="skeleton new-item__top-text-skeleton"></div>
-                    <div className="skeleton new-item__bottom-text-skeleton"></div>
-                    <div className="nft__item_like skeleton new-item__like-skeleton"></div>
+                  <Skeleton width={"228.66px"} height={"350px"} additionalClasses={""} />
+                  <div className="new-item__skeleton-text-wrap nft__item_info">
+                    <Skeleton width={"65%"} height={"28px"} />
+                    <Skeleton width={"25%"} height={"16px"} />
+                    <Skeleton width={"24px"} height={"12px"} additionalClasses={"nft__item_like"} />
                   </div>
                 </div>
               </div>
