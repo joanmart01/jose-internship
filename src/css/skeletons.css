@@ -1,0 +1,84 @@
+
+/* SKELETON LOADING STATE ADJUSMENTS */
+
+
+/* HOT COLLECTIONS */
+
+.img__skeleton--wrapper {
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.check__skeleton--wrap {
+    background-color: #8364e2;
+    color: white;
+    font-size: 10px;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 37%;
+    right: 43%;
+} 
+
+.nft_coll_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    gap: 8px;
+}
+
+
+
+
+/* NEW ITEMS */
+
+.nft__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.new-item__check{
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    padding: 2px; 
+    font-size: 12px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    color: white;
+    z-index: 1;
+}
+
+.nft__item_info {
+    display: flex;
+    flex-direction: column;
+    /* position: relative; */
+    gap: 8px;
+}
+
+.nft__item_like {
+    position: absolute;
+    bottom: 4px;
+    right: 0;
+}
+
+
+
+
+/* TOP SELLERS */
+
+.author_list_info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

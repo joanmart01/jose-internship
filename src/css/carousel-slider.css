@@ -1,0 +1,44 @@
+
+
+/* ARROWS */
+.slick-prev:before,
+.slick-next:before {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+
+.slick-prev:before {
+    content: '‹';
+}
+[dir='rtl'] .slick-prev:before {
+    content: '›';
+}
+
+.slick-next:before{
+    content: '›';
+}
+[dir='rtl'] .slick-next:before{
+    content: '‹';
+}
+
+
+
+
+/* SLIDE ADJUSTMENTS */
+
+.slide__wrap {
+    display: inline-block;
+    padding-right: 15px;
+    padding-left: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+#hot-collections-slider .slick-slider .slick-list {
+    max-height: 353px;
+}
+
+#new-items-slider .slick-slider .slick-list {
+    max-height: 460px;
+}
+

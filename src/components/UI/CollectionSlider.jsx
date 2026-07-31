@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../../css/carousel-arrows.css";
+import "../../css/carousel-slider.css";
 
 const CollectionSlider = ({array, ID}) => {
 
@@ -68,7 +68,7 @@ const CollectionSlider = ({array, ID}) => {
 
   return (
     <div id={ID}>
-        <Slider id="hello" ref={slider => sliderRef=slider} {...settings}>
+        <Slider ref={slider => sliderRef=slider} {...settings}>
             {array}
         </Slider>
     </div>

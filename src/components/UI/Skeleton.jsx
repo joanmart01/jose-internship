@@ -1,15 +1,20 @@
 import React from "react";
+import "../../css/skeletons.css";
 
-const Skeleton = ({ width, height, borderRadius }) => {
+const Skeleton = ({ width, height, borderRadius, additionalClasses }) => {
+  
+  additionalClasses += " skeleton-box";
+
   return (
     <div
-      className="skeleton-box"
+    className={additionalClasses}
       style={{
         width,
         height,
         borderRadius,
       }}
-    ></div>
+    >
+    </div>
   );
 };
 
