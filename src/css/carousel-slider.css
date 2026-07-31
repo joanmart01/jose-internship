@@ -34,10 +34,6 @@
     overflow: hidden;
 }
 
-.slick-slide {
-    min-width: 300px;
-}
-
 #hot-collections-slider .slick-slider .slick-list {
     max-height: 353px;
 }
