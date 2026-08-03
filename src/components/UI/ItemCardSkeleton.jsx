@@ -5,7 +5,7 @@ const ItemCardSkeleton = () => {
     return (
         <div className="skeleton__slide nft__item">
             <i className="fa fa-check new-item__check"></i>
-            <Skeleton width={"228.66px"} height={"350px"} additionalClasses={""} />
+            <Skeleton width={"100%"} height={"350px"} additionalClasses={""} />
             <div className="new-item__skeleton-text-wrap nft__item_info">
             <Skeleton width={"65%"} height={"28px"} />
             <Skeleton width={"25%"} height={"16px"} />
