@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const Timer = ({expTime}) => {
 
     const[secText, setSecText] = useState("0");
     const [hourText, setHourText] = useState("0");
     const [minText, setMinText] = useState("0");
+    const timerRef = useRef(null);
 
     let millisecs = 0;
     let timerID;
@@ -44,13 +45,16 @@ const Timer = ({expTime}) => {
         minutes = seconds/60;
         hours = minutes/60;
         
-        setSecText((Math.floor(seconds % 60)).toString().padStart(2, "0"));
-        setMinText((Math.floor(minutes % 60)).toString().padStart(2, "0"));
-        setHourText((Math.floor(hours)).toString());
+        if(timerRef.current) {
+            setSecText((Math.floor(seconds % 60)).toString().padStart(2, "0"));
+            setMinText((Math.floor(minutes % 60)).toString().padStart(2, "0"));
+            setHourText((Math.floor(hours)).toString());
+        }
+
     }
 
     return (
-        <div className="de_countdown">{`${hourText}h ${minText}m ${secText}s`}</div>
+        <div ref={timerRef} className="de_countdown">{`${hourText}h ${minText}m ${secText}s`}</div>
     )
 }
 

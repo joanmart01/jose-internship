@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import CollectionSlider from "../UI/CollectionSlider";
 import Timer from "../UI/Timer";
-import Skeleton from "../UI/Skeleton";
+import ItemCard from "../UI/ItemCard";
+import ItemCardSkeleton from "../UI/ItemCardSkeleton";
 
 const NewItems = () => {
   const [items, setItems] = useState([]);
@@ -37,74 +38,15 @@ const NewItems = () => {
           array={loading?
             new Array(4).fill().map((_, index)=> (
               <div className="slide__wrap" key={index}>
-                <div className="skeleton__slide nft__item">
-                  <i className="fa fa-check new-item__check"></i>
-                  <Skeleton width={"228.66px"} height={"350px"} additionalClasses={""} />
-                  <div className="new-item__skeleton-text-wrap nft__item_info">
-                    <Skeleton width={"65%"} height={"28px"} />
-                    <Skeleton width={"25%"} height={"16px"} />
-                    <Skeleton width={"24px"} height={"12px"} additionalClasses={"nft__item_like"} />
-                  </div>
-                </div>
+                <ItemCardSkeleton />
               </div>
             ))
             
             : 
             items.map((it)=> (
-            <div className="slide__wrap" key={it.id}>
-              <div className="nft__item">
-                <div className="author_list_pp">
-                  <Link
-                    to="/author"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Creator: Monica Lucas"
-                  >
-                    <img className="lazy" src={it.authorImage} alt="" />
-                    <i className="fa fa-check"></i>
-                  </Link>
-                </div>
-                <Timer expTime={it.expiryDate}/>
-
-                <div className="nft__item_wrap">
-                  <div className="nft__item_extra">
-                    <div className="nft__item_buttons">
-                      <button>Buy Now</button>
-                      <div className="nft__item_share">
-                        <h4>Share</h4>
-                        <a href="" target="_blank" rel="noreferrer">
-                          <i className="fa fa-facebook fa-lg"></i>
-                        </a>
-                        <a href="" target="_blank" rel="noreferrer">
-                          <i className="fa fa-twitter fa-lg"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-envelope fa-lg"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <Link to="/item-details">
-                    <img
-                      src={it.nftImage}
-                      className="lazy nft__item_preview"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="nft__item_info">
-                  <Link to="/item-details">
-                    <h4>{it.title}</h4>
-                  </Link>
-                  <div className="nft__item_price">{`${it.price} ETH`}</div>
-                  <div className="nft__item_like">
-                    <i className="fa fa-heart"></i>
-                    <span>{it.likes}</span>
-                  </div>
-                </div>
+              <div className="slide__wrap" key={it.id}>
+                <ItemCard className={"slide__wrap"} item={it} key={it.id} />
               </div>
-            </div>
             ))
           } />
 
