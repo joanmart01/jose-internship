@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ItemCard from "../UI/ItemCard";
 import ItemCardSkeleton from "../UI/ItemCardSkeleton";
@@ -6,22 +6,24 @@ import "../../css/explore-items.css";
 
 const ExploreItems = () => {
 
-  const [loading, setLoading] = useState(true);
   const [allItems, setAllItems] = useState([]);
   const [currItems, setCurrentItems] = useState([]);
   const [currLimit, setCurrentLimit] = useState(0);
   const rowSize = 4;
   const initialNum = 8;
-  
-  const buttRef = useRef(null);
+
+  const [loading, setLoading] = useState(true);
+  const [loadMoreEnabled, setLoadMoreEnabled] = useState(true);
   
   useEffect(()=>{
     fetchItems();    
     setLoading(false);
   }, [])
 
-  async function fetchItems() {
-    const promise = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/explore");
+  async function fetchItems(str) {
+    let target = "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore";
+    if(str) target += `?filter=${str}`;
+    const promise = await axios.get(target);
     setAllItems(promise.data);
     setCurrentItems(promise.data.slice(0, initialNum));
     setCurrentLimit(initialNum);
@@ -31,12 +33,19 @@ const ExploreItems = () => {
     let nextLimit = currLimit + rowSize;
     setCurrentItems([...currItems, ...allItems.slice(currLimit, nextLimit)]);
     setCurrentLimit(nextLimit);
+    setLoadMoreEnabled(nextLimit < allItems.length-1);  
+  }
+
+  function filterItems(val) {
+    fetchItems(val);
   }
 
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="">
+        <select id="filter-items" 
+                defaultValue="" 
+                onChange={(event)=>filterItems(event.target.value)}>
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
@@ -68,12 +77,15 @@ const ExploreItems = () => {
       </div>
 
       <div className="col-md-12 text-center">
-        <button ref={buttRef}
-                id="loadmore" 
+        {loadMoreEnabled?
+        <button id="loadmore" 
                 className="btn-main lead"
                 onClick={loadMoreItems}>
           Load more
         </button>
+        :
+        <></>
+        }
       </div>
     </>
   );
