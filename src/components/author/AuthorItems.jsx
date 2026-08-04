@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ItemCardSkeleton from "../UI/ItemCardSkeleton"
 
 const AuthorItems = ({collection, imgAddress}) => {
+
   return (
     <div className="de_tab_content">
       <div className="tab-1">
@@ -36,7 +37,7 @@ const AuthorItems = ({collection, imgAddress}) => {
                         </div>
                       </div>
                     </div>
-                    <Link to="/item-details">
+                    <Link to={`/item-details/${item.nftId}`}>
                       <img
                         src={item.nftImage}
                         className="lazy nft__item_preview"
@@ -45,7 +46,7 @@ const AuthorItems = ({collection, imgAddress}) => {
                     </Link>
                   </div>
                   <div className="nft__item_info">
-                    <Link to="/item-details">
+                    <Link to={`/item-details/${item.nftId}`}>
                       <h4>{item.title}</h4>
                     </Link>
                     <div className="nft__item_price">{item.price} ETH</div>
@@ -59,7 +60,7 @@ const AuthorItems = ({collection, imgAddress}) => {
             ))
           :
             <div className="row author-items__skeleton-row">
-              {new Array(8).fill().map(()=> <ItemCardSkeleton width={"24%"} />)}
+              {new Array(8).fill().map((_, index)=> <ItemCardSkeleton width={"24%"} key={index}/>)}
             </div>
           }
 
