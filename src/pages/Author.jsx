@@ -3,6 +3,7 @@ import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import Skeleton from '../components/UI/Skeleton'; 
 
 const Author = () => {
 
@@ -42,7 +43,39 @@ const Author = () => {
         ></section>
 
         {loading?
-        <></>
+          <section aria-label="section">
+            <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="d_profile de-flex">
+                  <div className="de-flex-col">
+                    <div className="profile_avatar">
+                      <Skeleton width={"150px"} height={"150px"} borderRadius={"50%"} />
+                      <i className="fa fa-check"></i>
+                      <div className="profile_name">
+                        <Skeleton width={"250px"} height={"28px"} />
+                        <Skeleton width={"50%"} height={"20px"} />
+                        <Skeleton width={"250px"} height={"20px"} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="profile_follow de-flex">
+                    <div className="de-flex-col">
+                      <Skeleton width={"160px"} height={"40px"} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-12">
+                <div className="de_tab tab_simple">
+                  <AuthorItems />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
           :
         <section aria-label="section">
           <div className="container">
@@ -98,7 +131,6 @@ const Author = () => {
             </div>
           </div>
         </section>
-
         }
 
 
