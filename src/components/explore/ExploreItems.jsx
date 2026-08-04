@@ -26,6 +26,7 @@ const ExploreItems = () => {
     setAllItems(promise.data);
     setCurrentItems(promise.data.slice(0, initialNum));
     setCurrentLimit(initialNum);
+    console.log(promise.data);
   }
 
   function loadMoreItems() {
