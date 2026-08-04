@@ -8,16 +8,24 @@ const Author = () => {
 
   const {authorId} = useParams();
   const [author, setAuthor] = useState([]);
+  const [followers, setFollowers] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [following, setFollowing] = useState(false);
 
   useEffect(()=>{
     fetchItemInfo();
     setLoading(false);
-  })
+  }, [])
 
   async function fetchItemInfo() {
     const {data} = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`);
     setAuthor(data);
+    setFollowers(data.followers);
+  }
+
+  function setFollowAuthor(follow) {
+    setFollowers(followers + (follow? 1 : -1));
+    setFollowing(follow);
   }
 
   return (
@@ -36,7 +44,7 @@ const Author = () => {
         {loading?
         <></>
           :
-                  <section aria-label="section">
+        <section aria-label="section">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
@@ -62,10 +70,20 @@ const Author = () => {
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">{`${author.followers} followers`}</div>
-                      <Link to="#" className="btn-main">
-                        Follow
-                      </Link>
+                      <div className="profile_follower">{`${followers} followers`}</div>
+                      
+                      {following?
+                        <button className="btn-main"
+                                onClick={()=> setFollowAuthor(false)}>
+                          Unfollow
+                        </button>
+                        :
+                        <button className="btn-main"
+                                onClick={()=> setFollowAuthor(true)}>
+                          Follow
+                        </button>
+                      }
+
                     </div>
                   </div>
                 </div>
