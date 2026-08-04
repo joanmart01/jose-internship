@@ -13,6 +13,10 @@ const Author = () => {
   const [loading, setLoading] = useState(true);
   const [following, setFollowing] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(()=>{
     fetchItemInfo();
     setLoading(false);
