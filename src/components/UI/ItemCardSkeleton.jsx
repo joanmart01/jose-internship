@@ -1,9 +1,9 @@
 import React from 'react';
 import Skeleton from './Skeleton';
 
-const ItemCardSkeleton = () => {
+const ItemCardSkeleton = ({width}) => {
     return (
-        <div className="skeleton__slide nft__item">
+        <div className="skeleton__slide nft__item" style={{width}}>
             <i className="fa fa-check new-item__check"></i>
             <Skeleton width={"100%"} height={"350px"} additionalClasses={""} />
             <div className="new-item__skeleton-text-wrap nft__item_info">

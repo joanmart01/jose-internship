@@ -83,3 +83,30 @@
     flex-direction: column;
     gap: 8px;
 }
+
+
+
+
+/* AUTHOR PAGE */   
+
+.profile_name {
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+    align-items: start;
+    gap: 12px;
+}
+
+.de-flex-col {
+    padding-right: 24px;
+}
+
+
+
+/*
+*/
+
+.author-items__skeleton-row {
+    column-gap: 16px;
+    justify-content: space-between;
+}
