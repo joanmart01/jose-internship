@@ -26,7 +26,6 @@ const ExploreItems = () => {
     setAllItems(promise.data);
     setCurrentItems(promise.data.slice(0, initialNum));
     setCurrentLimit(initialNum);
-    console.log(promise.data);
   }
 
   function loadMoreItems() {
@@ -66,8 +65,8 @@ const ExploreItems = () => {
           </div>
         ))
         :
-        currItems.map((item, index) => (
-          <div key={index}
+        currItems.map((item) => (
+          <div key={item.id}
               className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
               style={{ display: "block", backgroundSize: "cover" }} >
             <ItemCard item={item}/>
