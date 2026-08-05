@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import Skeleton from '../components/UI/Skeleton'; 
 
@@ -18,15 +18,14 @@ const Author = () => {
   }, []);
 
   useEffect(()=>{
+    async function fetchAuthorInfo() {
+      const {data} = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`);
+      setAuthor(data);
+      setFollowers(data.followers);
+    }
     fetchAuthorInfo();
     setLoading(false);
-  }, [])
-
-  async function fetchAuthorInfo() {
-    const {data} = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`);
-    setAuthor(data);
-    setFollowers(data.followers);
-  }
+  }, [authorId])
 
   function setFollowAuthor(follow) {
     setFollowers(followers + (follow? 1 : -1));

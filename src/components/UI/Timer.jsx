@@ -7,41 +7,24 @@ const Timer = ({expTime}) => {
     const [minText, setMinText] = useState("0");
     const timerRef = useRef(null);
 
-    let millisecs = 0;
-    let timerID;
-    let initialTime;
-
+    let milliseconds = 10;
     let seconds;
     let minutes;
     let hours;
 
     useEffect(()=> {
-        startStopWatch();
+        if(expTime > Date.now()) {
+            const timerID = setInterval(() => {
+                if(milliseconds > 0) updateTimer();
+            }, 1000)
+            return ()=> clearInterval(timerID);
+        }
     }, [])
 
-    function startStopWatch() {
-        millisecs += expTime;
-        initialTime = millisecs;
-        timerID = setInterval(()=>timerLoop(), 1000);
-    }
-
-    function stopTimer() {
-        clearInterval(timerID);
-    }
-
-    function resetStopWatch() {
-        initialTime = Date.now() + expTime; 
-        updateTimer();
-    }
-
-    function timerLoop() {
-        if(millisecs > 0) updateTimer();
-        else stopTimer();
-    }
-
     function updateTimer() {
-        millisecs = initialTime - Date.now();
-        seconds = millisecs/1000;
+        milliseconds = expTime - Date.now();
+        if(milliseconds<0) return;
+        seconds = milliseconds/1000;
         minutes = seconds/60;
         hours = minutes/60;
         
@@ -50,7 +33,6 @@ const Timer = ({expTime}) => {
             setMinText((Math.floor(minutes % 60)).toString().padStart(2, "0"));
             setHourText((Math.floor(hours)).toString());
         }
-
     }
 
     return (

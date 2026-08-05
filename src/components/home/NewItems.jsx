@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import CollectionSlider from "../UI/CollectionSlider";
-import Timer from "../UI/Timer";
 import ItemCard from "../UI/ItemCard";
 import ItemCardSkeleton from "../UI/ItemCardSkeleton";
 
@@ -44,7 +42,10 @@ const NewItems = () => {
             : 
             items.map((it)=> (
               <div className="slide__wrap" key={it.id}>
-                <ItemCard className={"slide__wrap"} item={it} key={it.id} />
+                <ItemCard className={"slide__wrap"} key={it.id} 
+                          item={it}
+                          expirationDate={it.expiryDate}
+                          authorImage={it.authorImage}/>
               </div>
             ))
           } />

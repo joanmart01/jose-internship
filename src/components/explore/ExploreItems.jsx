@@ -69,7 +69,9 @@ const ExploreItems = () => {
           <div key={item.id}
               className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
               style={{ display: "block", backgroundSize: "cover" }} >
-            <ItemCard item={item}/>
+            <ItemCard item={item} 
+                      expirationDate={item.expiryDate} 
+                      authorImage={item.authorImage}/>
           </div>
         ))
         }
