@@ -16,16 +16,17 @@ const ExploreItems = () => {
   
   useEffect(()=>{
     fetchItems();    
-    setLoading(false);
   }, [])
 
   async function fetchItems(str) {
+    setLoading(true);
     let target = "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore";
     if(str) target += `?filter=${str}`;
     const promise = await axios.get(target);
     setAllItems(promise.data);
     setCurrentItems(promise.data.slice(0, initialNum));
     setCurrentLimit(initialNum);
+    setLoading(false);
   }
 
   function loadMoreItems() {

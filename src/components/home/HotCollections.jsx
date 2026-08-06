@@ -10,12 +10,13 @@ const HotCollections = () => {
 
   useEffect(()=>{
     fetchCollections();
-    setLoading(false);
   }, [])
 
   async function fetchCollections() {
+    setLoading(true);
     const promise = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"); 
     setCollections(promise.data);
+    setLoading(false);
   }
 
   return (

@@ -10,12 +10,13 @@ const TopSellers = () => {
 
   useEffect(()=> {
     fetchSellers();
-    setLoading(false);
   }, [])
 
   async function fetchSellers() {
+    setLoading(true);
     const promise = await axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers");
     setSellers(promise.data);
+    setLoading(false);
   }
 
   return (

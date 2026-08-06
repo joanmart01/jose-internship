@@ -15,11 +15,12 @@ const ItemDetails = () => {
 
   useEffect(()=> {
     async function fetchItemInfo() {
+      setLoading(true);
       const {data} = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`);
       setItem(data);
+      setLoading(false);
     }
     fetchItemInfo();
-    setLoading(false);
   }, [nftId])
 
 
